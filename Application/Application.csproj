@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Common\Interfaces\" />
+    <Folder Include="Common\Exceptions\" />
+    <Folder Include="Common\Paginations\" />
+    <Folder Include="Common\Validations\" />
+    <Folder Include="Features\Service\" />
+    <Folder Include="Modules\HumanResources\Handlers\" />
+    <Folder Include="Modules\Sales\Commands\" />
+    <Folder Include="Modules\Sales\DTOs\" />
+    <Folder Include="Modules\Sales\Interfaces\" />
+    <Folder Include="Modules\Sales\Queries\" />
+    <Folder Include="Modules\Sales\Validators\" />
+    <Folder Include="Modules\Purchases\Commands\" />
+    <Folder Include="Modules\Purchases\DTOs\" />
+    <Folder Include="Modules\Purchases\Interfaces\" />
+    <Folder Include="Modules\Purchases\Queries\" />
+    <Folder Include="Modules\Purchases\Validators\" />
+    <Folder Include="Modules\ZZModulesTemplet\Commands\" />
+    <Folder Include="Modules\ZZModulesTemplet\DTOs\" />
+    <Folder Include="Modules\ZZModulesTemplet\Interfaces\" />
+    <Folder Include="Modules\ZZModulesTemplet\Queries\" />
+    <Folder Include="Modules\ZZModulesTemplet\Validators\" />
+    <Folder Include="Modules\Finance\Interfaces\" />
+    <Folder Include="Modules\Finance\DTOs\" />
+    <Folder Include="Modules\Finance\Commands\" />
+    <Folder Include="Modules\Finance\Queries\" />
+    <Folder Include="Modules\Finance\Validators\" />
+    <Folder Include="Modules\HumanResources\Commands\" />
+    <Folder Include="Modules\HumanResources\Interfaces\" />
+    <Folder Include="Modules\HumanResources\Validators\" />
+    <Folder Include="Modules\HumanResources\Queries\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="DTOs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.1.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.5" />
+  </ItemGroup>
+
+</Project>
