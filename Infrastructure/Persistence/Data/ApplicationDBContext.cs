@@ -38,17 +38,28 @@ namespace Infrastructure.Persistence.Data
 
         #endregion
 
+        #region SupplyChain Module
+
+        public DbSet<Warehouse> Warehouses => Set<Warehouse>();
+        public DbSet<Inventory> Inventories => Set<Inventory>();
+        public DbSet<StockMovement> StockMovements => Set<StockMovement>();
+        public DbSet<Shipment> Shipments => Set<Shipment>();
+
+        #endregion
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             ApplyHRConfigurations(modelBuilder);
             ApplyCommerceConfigurations(modelBuilder);
+            ApplySupplyChainConfigurations(modelBuilder);
 
             ApplyGlobalFilters(modelBuilder);
         }
 
         // ================= HR =================
+        #region HR ModelBuilder
         private void ApplyHRConfigurations(ModelBuilder modelBuilder)
         {
 
@@ -103,8 +114,9 @@ namespace Infrastructure.Persistence.Data
                 entity.Property(p => p.NetSalary).HasPrecision(18, 2);
             });
         }
-
+        #endregion
         // ================= E-Commerce =================
+        #region E-Commerce ModelBuilder
         private void ApplyCommerceConfigurations(ModelBuilder modelBuilder)
         {
 
@@ -203,6 +215,92 @@ namespace Infrastructure.Persistence.Data
                       .HasForeignKey<Payment>(p => p.OrderId);
             });
         }
+        #endregion
+        // ================= SupplyChain =================
+        #region SupplyChain ModelBuilder
+        private void ApplySupplyChainConfigurations(ModelBuilder modelBuilder)
+        {
+            // ================= Warehouse =================
+            modelBuilder.Entity<Warehouse>(entity =>
+            {
+                entity.ToTable("Warehouses", "supplychain");
+
+                entity.Property(w => w.ArName)
+                      .IsRequired()
+                      .HasMaxLength(200);
+
+                entity.Property(w => w.EnName)
+                      .IsRequired()
+                      .HasMaxLength(200);
+
+                entity.Property(w => w.Location)
+                      .IsRequired()
+                      .HasMaxLength(300);
+
+                entity.HasIndex(w => w.ArName).IsUnique();
+            });
+
+            // ================= Inventory =================
+            modelBuilder.Entity<Inventory>(entity =>
+            {
+                entity.ToTable("Inventories", "supplychain");
+
+                entity.HasKey(i => new { i.WarehouseId, i.ProductId });
+
+                entity.Property(i => i.Quantity)
+                      .IsRequired();
+
+                entity.HasOne(i => i.Warehouse)
+                      .WithMany(w => w.Inventories)
+                      .HasForeignKey(i => i.WarehouseId)
+                      .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasOne(i => i.Product)
+                      .WithMany(p => p.Inventories)
+                      .HasForeignKey(i => i.ProductId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+
+            // ================= Stock Movement =================
+            modelBuilder.Entity<StockMovement>(entity =>
+            {
+                entity.ToTable("StockMovements", "supplychain");
+
+                entity.Property(m => m.Quantity)
+                      .IsRequired();
+
+                entity.HasIndex(m => m.ProductId);
+                entity.HasIndex(m => m.WarehouseId);
+                entity.HasIndex(m => m.CreatedAt);
+
+                entity.Property(m => m.Type)
+                      .IsRequired();
+            });
+
+            // ================= Shipment =================
+            modelBuilder.Entity<Shipment>(entity =>
+            {
+                entity.ToTable("Shipments", "supplychain");
+
+                entity.Property(s => s.DeliveryAddress)
+                      .IsRequired()
+                      .HasMaxLength(500);
+
+                entity.Property(s => s.Status)
+                      .IsRequired();
+
+                entity.HasOne<Order>()
+                      .WithOne()
+                      .HasForeignKey<Shipment>(s => s.OrderId)
+                      .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasOne<Warehouse>()
+                      .WithMany()
+                      .HasForeignKey(s => s.WarehouseId)
+                      .OnDelete(DeleteBehavior.Restrict);
+            });
+        }
+        #endregion
 
 
 

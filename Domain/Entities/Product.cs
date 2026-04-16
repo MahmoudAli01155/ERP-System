@@ -19,6 +19,7 @@ namespace Domain.Entities
 
         public Guid CategoryId { get; private set; }
         public Category Category { get; private set; } = null!;
+        public ICollection<Inventory> Inventories { get; set; } = new List<Inventory>();
 
 
         // 🔥 EF Core constructor (IMPORTANT)
