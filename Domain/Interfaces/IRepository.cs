@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Common;
 
 namespace Domain.Interfaces
 {
@@ -14,5 +15,8 @@ namespace Domain.Interfaces
         Task AddAsync(T entity);
         void Update(T entity);
         void Delete(T entity);
+
+        IQueryable<T> Query();
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
     }
 }

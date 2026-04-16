@@ -13,10 +13,9 @@
   <ItemGroup>
     <Folder Include="Common\Interfaces\" />
     <Folder Include="Common\Exceptions\" />
-    <Folder Include="Common\Paginations\" />
     <Folder Include="Common\Validations\" />
     <Folder Include="Features\Service\" />
-    <Folder Include="Modules\HumanResources\Handlers\" />
+    <Folder Include="Modules\HumanResources\Validators\Employee\" />
     <Folder Include="Modules\Sales\Commands\" />
     <Folder Include="Modules\Sales\DTOs\" />
     <Folder Include="Modules\Sales\Interfaces\" />
@@ -37,17 +36,14 @@
     <Folder Include="Modules\Finance\Commands\" />
     <Folder Include="Modules\Finance\Queries\" />
     <Folder Include="Modules\Finance\Validators\" />
-    <Folder Include="Modules\HumanResources\Commands\" />
-    <Folder Include="Modules\HumanResources\Interfaces\" />
-    <Folder Include="Modules\HumanResources\Validators\" />
-    <Folder Include="Modules\HumanResources\Queries\" />
     <Folder Include="Interfaces\" />
-    <Folder Include="DTOs\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="16.1.1" />
     <PackageReference Include="MediatR" Version="14.1.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.5" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.7.2" />
   </ItemGroup>
 
 </Project>

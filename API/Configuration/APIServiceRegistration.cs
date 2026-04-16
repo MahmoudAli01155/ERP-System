@@ -6,6 +6,7 @@
         {
             // Middlewares [  ]
             // built in middleware
+            services.AddHttpContextAccessor();
             return services;
         }
     }

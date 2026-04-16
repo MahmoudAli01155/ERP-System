@@ -22,6 +22,9 @@ namespace Domain.Common
         public void SoftDelete()
         {
             IsDeleted = true;
+            IsActive = false;
+            ModifiedAt = DateTime.UtcNow;
+            //ModifiedBy = user;
         }
     }
 }

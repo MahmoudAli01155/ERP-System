@@ -1,12 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Domain.Common;
+using Domain.Interfaces;
+using Infrastructure.Persistence.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using Domain.Common;
-using Domain.Interfaces;
-using Infrastructure.Persistence.Data;
 
 namespace Infrastructure.Repositories
 {
@@ -48,6 +49,16 @@ namespace Infrastructure.Repositories
         {
             entity.SoftDelete();
             _dbSet.Update(entity);
+        }
+
+        public IQueryable<T> Query()
+        {
+            return _dbSet.AsQueryable();
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.AnyAsync(predicate);
         }
     }
 }

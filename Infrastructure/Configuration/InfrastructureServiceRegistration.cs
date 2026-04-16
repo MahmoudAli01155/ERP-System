@@ -30,6 +30,8 @@ namespace Infrastructure.Configuration
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<IPayrollRepository, PayrollRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
             return services;
         }
     }

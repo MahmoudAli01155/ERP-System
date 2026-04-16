@@ -18,15 +18,33 @@ namespace Infrastructure.Repositories
         private readonly ILogger<UnitOfWork> _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
+        public IEmployeeRepository EmployeeRepository { get; }
+        public IDepartmentRepository DepartmentRepository { get; }
+        public IAttendanceRepository AttendanceRepository { get; }
+        public ILeaveRepository LeaveRepository { get; }
+        public IPayrollRepository PayrollRepository { get; }
+
         public UnitOfWork(
             ApplicationDBContext context,
             ILogger<UnitOfWork> logger,
-            IHttpContextAccessor httpContextAccessor)
+            IHttpContextAccessor httpContextAccessor,
+            IEmployeeRepository employeeRepository,
+            IDepartmentRepository departmentRepository,
+            IAttendanceRepository attendanceRepository,
+            ILeaveRepository leaveRepository,
+            IPayrollRepository payrollRepository)
         {
             _context = context;
             _logger = logger;
             _httpContextAccessor = httpContextAccessor;
+
+            EmployeeRepository = employeeRepository;
+            DepartmentRepository = departmentRepository;
+            AttendanceRepository = attendanceRepository;
+            LeaveRepository = leaveRepository;
+            PayrollRepository = payrollRepository;
         }
+
 
         public async Task<int> SaveChangesAsync(
             CancellationToken cancellationToken = default)

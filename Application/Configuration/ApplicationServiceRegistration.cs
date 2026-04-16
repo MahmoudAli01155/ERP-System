@@ -1,4 +1,8 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Application.Modules.HumanResources.DTOs.Employee;
+using Application.Modules.HumanResources.Interfaces.Employee;
+using Application.Modules.HumanResources.Services.Employee;
+using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +17,16 @@ namespace Application.Configuration
         {
             services.AddMediatR(cfg =>
                 cfg.RegisterServicesFromAssembly(typeof(ApplicationServiceRegistration).Assembly));
+
+            services.AddMediatR(cfg =>
+                cfg.RegisterServicesFromAssemblies(AppDomain.CurrentDomain.GetAssemblies()));
+
+
+            // Use the Action<IMapperConfigurationExpression> overload to avoid passing an Assembly
+            services.AddAutoMapper(cfg => cfg.AddProfile(new EmployeeProfile()));
+
+
+            services.AddScoped<IEmployeeService, EmployeeService>();
 
             return services;
         }
