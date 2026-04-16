@@ -16,22 +16,44 @@ namespace Infrastructure.Configuration
     {
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration config)
         {
-            // Register your infrastructure services here
-            // For example:
-            // services.AddScoped<IYourRepository, YourRepository>();
-            // services.AddScoped<IYourService, YourService>();
-
+            // ================= DbContext =================
             services.AddDbContext<ApplicationDBContext>(options =>
             options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
+
+
+            // ================= Generic Repository =================
             services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+
+
+
+            // ================= Unit Of Work ==============================
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+
+
+            // ================= HR Repositories =================
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<IAttendanceRepository, AttendanceRepository>();
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<ILeaveRepository, LeaveRepository>();
             services.AddScoped<IPayrollRepository, PayrollRepository>();
 
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            // ================= E-Commerce Repositories =================
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<ICartRepository, CartRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+
+            // ================= Supply Chain Repositories =================
+            services.AddScoped<IWarehouseRepository, WarehouseRepository>();
+            services.AddScoped<IInventoryRepository, InventoryRepository>();
+            services.AddScoped<IStockMovementRepository, StockMovementRepository>();
+            services.AddScoped<IShipmentRepository, ShipmentRepository>();
+
+
+
             return services;
         }
     }

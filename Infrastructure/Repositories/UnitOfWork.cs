@@ -24,6 +24,19 @@ namespace Infrastructure.Repositories
         public ILeaveRepository LeaveRepository { get; }
         public IPayrollRepository PayrollRepository { get; }
 
+        // E-Commerce
+        public ICategoryRepository CategoryRepository { get; }
+        public IProductRepository ProductRepository { get; }
+        public ICartRepository CartRepository { get; }
+        public IOrderRepository OrderRepository { get; }
+        public IPaymentRepository PaymentRepository { get; }
+
+        // Supply Chain
+        public IWarehouseRepository WarehouseRepository { get; }
+        public IInventoryRepository InventoryRepository { get; }
+        public IStockMovementRepository StockMovementRepository { get; }
+        public IShipmentRepository ShipmentRepository { get; }
+
         public UnitOfWork(
             ApplicationDBContext context,
             ILogger<UnitOfWork> logger,
