@@ -4,6 +4,7 @@ using Infrastructure.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20260416141020_add-E-Commerce-Entities")]
+    partial class addECommerceEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +65,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Attendances", "hr");
+                    b.ToTable("Attendances");
                 });
 
             modelBuilder.Entity("Domain.Entities.Cart", b =>
@@ -95,7 +98,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Carts", "commerce");
+                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("Domain.Entities.Category", b =>
@@ -134,7 +137,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories", "commerce");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Domain.Entities.Department", b =>
@@ -171,7 +174,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", "hr");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("Domain.Entities.Employee", b =>
@@ -238,7 +241,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Employees", "hr");
+                    b.ToTable("Employees");
                 });
 
             modelBuilder.Entity("Domain.Entities.Leave", b =>
@@ -288,7 +291,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Leaves", "hr");
+                    b.ToTable("Leaves");
                 });
 
             modelBuilder.Entity("Domain.Entities.Order", b =>
@@ -328,7 +331,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Orders", "commerce");
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("Domain.Entities.Payment", b =>
@@ -370,7 +373,7 @@ namespace Infrastructure.Migrations
                     b.HasIndex("OrderId")
                         .IsUnique();
 
-                    b.ToTable("Payments", "commerce");
+                    b.ToTable("Payments");
                 });
 
             modelBuilder.Entity("Domain.Entities.Payroll", b =>
@@ -426,7 +429,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Payrolls", "hr");
+                    b.ToTable("Payrolls");
                 });
 
             modelBuilder.Entity("Domain.Entities.Product", b =>
@@ -483,7 +486,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("Price");
 
-                    b.ToTable("Products", "commerce");
+                    b.ToTable("Products");
                 });
 
             modelBuilder.Entity("Domain.Entities.Attendance", b =>
@@ -518,7 +521,7 @@ namespace Infrastructure.Migrations
 
                             b1.HasIndex("CartId");
 
-                            b1.ToTable("CartItem", "commerce");
+                            b1.ToTable("CartItem");
 
                             b1.WithOwner()
                                 .HasForeignKey("CartId");
@@ -574,7 +577,7 @@ namespace Infrastructure.Migrations
 
                             b1.HasIndex("OrderId");
 
-                            b1.ToTable("OrderItem", "commerce");
+                            b1.ToTable("OrderItem");
 
                             b1.WithOwner()
                                 .HasForeignKey("OrderId");

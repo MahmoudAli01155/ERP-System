@@ -22,6 +22,11 @@ namespace Domain.Entities
 
         public string Reason { get; private set; } = null!;
 
+
+        // 🔥 EF Core constructor (IMPORTANT)
+        private Leave() { }
+
+        // Business constructor
         public Leave(Guid employeeId, DateTime from, DateTime to, string reason)
         {
             if (to < from)
