@@ -19,12 +19,12 @@ namespace Domain.Common
         public bool IsActive { get; protected set; } = true;
 
 
-        public void SoftDelete()
+        public void SoftDelete(string? user = null)
         {
             IsDeleted = true;
             IsActive = false;
             ModifiedAt = DateTime.UtcNow;
-            //ModifiedBy = user;
+            ModifiedBy = user;
         }
     }
 }

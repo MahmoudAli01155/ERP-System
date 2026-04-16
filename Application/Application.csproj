@@ -16,6 +16,7 @@
     <Folder Include="Common\Validations\" />
     <Folder Include="Features\Service\" />
     <Folder Include="Modules\HumanResources\Validators\Employee\" />
+    <Folder Include="Modules\HumanResources\Validators\Department\" />
     <Folder Include="Modules\Sales\Commands\" />
     <Folder Include="Modules\Sales\DTOs\" />
     <Folder Include="Modules\Sales\Interfaces\" />
