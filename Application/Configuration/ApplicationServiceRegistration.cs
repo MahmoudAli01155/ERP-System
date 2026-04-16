@@ -1,7 +1,10 @@
-﻿using Application.Modules.HumanResources.DTOs.Department;
+﻿using Application.Modules.HumanResources.DTOs.Attendanc;
+using Application.Modules.HumanResources.DTOs.Department;
 using Application.Modules.HumanResources.DTOs.Employee;
+using Application.Modules.HumanResources.Interfaces.Attendanc;
 using Application.Modules.HumanResources.Interfaces.Department;
 using Application.Modules.HumanResources.Interfaces.Employee;
+using Application.Modules.HumanResources.Services.Attendanc;
 using Application.Modules.HumanResources.Services.Department;
 using Application.Modules.HumanResources.Services.Employee;
 using AutoMapper;
@@ -28,10 +31,12 @@ namespace Application.Configuration
             // Use the Action<IMapperConfigurationExpression> overload to avoid passing an Assembly
             services.AddAutoMapper(cfg => cfg.AddProfile(new EmployeeProfile()));
             services.AddAutoMapper(cfg => cfg.AddProfile(new DepartmentProfile()));
+            services.AddAutoMapper(cfg => cfg.AddProfile(new AttendanceProfile()));
 
 
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
+            services.AddScoped<IAttendanceService, AttendanceService>();
 
             return services;
         }
